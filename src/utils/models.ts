@@ -13,3 +13,15 @@ export interface ServiceLog {
   serviceDescription: string
   createdAt: string
 }
+
+export type ServiceLogFormValues = {
+  providerId: string
+  serviceOrder: string
+  carId: string
+  odometer: number
+  engineHours: number
+  startDate: string
+  endDate: string
+  type: "planned" | "unplanned" | "emergency"
+  serviceDescription: string
+}

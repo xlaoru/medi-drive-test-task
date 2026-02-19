@@ -6,8 +6,16 @@ export const serviceLogSchema = yup.object({
   providerId: yup.string().required(),
   serviceOrder: yup.string().required(),
   carId: yup.string().required(),
-  odometer: yup.number().required().min(0),
-  engineHours: yup.number().required().min(0),
+  odometer: yup
+    .number()
+    .required()
+    .min(0)
+    .typeError("Odometer must be a number"),
+  engineHours: yup
+    .number()
+    .required()
+    .min(0)
+    .typeError("Engine hours must be a number"),
   startDate: yup.string().required(),
   endDate: yup
     .string()
@@ -16,6 +24,9 @@ export const serviceLogSchema = yup.object({
       const { startDate } = this.parent
       return dayjs(value).isAfter(dayjs(startDate))
     }),
-  type: yup.mixed<ServiceType>().oneOf(["planned", "unplanned", "emergency"]),
+  type: yup
+    .mixed<ServiceType>()
+    .oneOf(["planned", "unplanned", "emergency"])
+    .required(),
   serviceDescription: yup.string().required(),
 })
